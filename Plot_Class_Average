@@ -1,0 +1,57 @@
+[file,path] = uigetfile('Z:\Data\*.csv');
+myfullfile = fullfile(path, file);
+rawdata = dlmread(myfullfile,',',1,0);
+
+%x1 = rawdata(:,21);
+%y1 = rawdata(:,22);
+x2 = rawdata(:,1);
+y2 = rawdata(:,2);
+x3 = rawdata(:,3);
+y3 = rawdata(:,4);
+
+distance = rawdata(:,5);
+
+%precision1 = rawdata(:,7);
+precision2 = rawdata(:,8);
+precision3 = rawdata(:,9);
+% precision1 = ones(length(distance),1)*60;
+% precision1 = 20;
+
+half_distance = distance/2;
+%half_precision1 = precision1/2;
+half_precision2 = precision2/2;
+half_precision3 = precision3/2;
+
+N = 150.0;
+M = 50.0;
+x = linspace(-120,120);
+y = linspace(-50,50);
+%y = linspace(-M,M);
+[X,Y] = meshgrid(x,y);
+
+z_matrix = zeros(100,100);
+
+for i = 1:length(x2)
+%    const1 = 1/((half_precision1^2)*2*pi);
+%    z1 = (exp((-((X-x1(i)).^2)-((Y-y1(i)).^2))/(2*(half_precision1(i)^2))));
+    
+%    const1 = 1/((half_precision1(i)^2)*2*pi);
+%    z1 = (exp((-((X).^2)-((Y).^2))/(2*(half_precision1(i)^2))));
+    
+%    const2 = 1/((half_precision1^2)*2*pi);
+    z2 = (exp((-((X-half_distance(i)).^2)-((Y).^2))/(2*(half_precision2(i)^2))));
+    
+%    const3 = 1/((half_precision1^2)*2*pi);
+    z3 = (exp((-((X+half_distance(i)).^2)-((Y).^2))/(2*(half_precision3(i)^2))));
+    
+    z_av = (z2 + z3)/2;
+%     z_av = z1;
+    z_matrix = z_matrix + z_av;
+end
+
+z_matrix_av = z_matrix/length(x2);
+    
+    
+surf(X,Y,z_matrix_av)
+shading interp
+axis tight
