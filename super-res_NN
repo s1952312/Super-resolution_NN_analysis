@@ -8,7 +8,6 @@ ydata = rawdata(:,2);
 %xStdDev = rawdata(1:end, 5);
 %yStdDev = rawdata(1:end, 6);
 precision = rawdata(:, 5);
-%precision = ones(length(xdata),1)*2e-09;
 
 number_points = length(xdata);
 
@@ -27,47 +26,6 @@ precision_cons = [];
 photon_number_cons = [];
 
 i = 1;
-
-xdata_rid = [];
-ydata_rid = [];
-precision_rid = [];
-
-xdata_keep = [];
-ydata_keep = [];
-precision_keep = [];
-
-% for p = 1:length(xdata)
-%     if precision(p) > 100
-%         xdata_rid = [xdata_rid,p];
-%         ydata_rid = [ydata_rid,p];
-%         precision_rid = [precision_rid,p];
-%     else
-%     end
-% end
-
-
-
-% xdata(xdata_rid) = [];
-% ydata(ydata_rid) = [];
-% precision(precision_rid) = [];
-% 
-% disp("Finished getting rid of large precision points.");
-
-% for q = 1:length(xdata)
-%     
-%     if xdata(q) > 20000 && xdata(q) <= 40000 && ydata(q) > 20000 && ydata(q) <= 40000 
-%         xdata_keep = [xdata_keep,q];
-%         ydata_keep = [ydata_keep,q];
-%         %precision_keep = [precision_keep,q];
-%     else
-%     end
-% end
-% 
-% xdata = xdata(xdata_keep);
-% ydata = ydata(ydata_keep);
-%precision = precision(precision_keep);
-
-disp("Finished selecting middle data points.");
 
 xdatacopy = xdata;
 ydatacopy = ydata;
